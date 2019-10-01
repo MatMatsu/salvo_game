@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Salvo!</title>
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+  <div id="app">
+    <header>  
+      <h1>Salvo!</h1>
+      <div class="userInfo">
+        <h2>{{user.name}}</h2>
+        <form method="post" action="/logout" v-show="user.id != null">
+          <button type="submit">Logout</button>
+        </form>
+        <form method="get" action="/web/login.html" v-show="user.id == null">
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </header>
+    <main class="tablas">
+      <!-- ++++++ -->
+      <!-- GAMES TABLE -->
+      <!-- ++++++ -->
+      <table class="gamesTable">
+        <caption>GAMES</caption>
+        <thead class="headGamesTable">
+          <tr>
+            <th>GAME CREATION</th>
+            <th>PLAYER 1</th>
+            <th>PLAYER 2</th>
+          </tr>
+        </thead>
+        <tbody class="bodyGamesTable">
+          <!-- data from json -->
+        </tbody>
+      </table>
+
+      <!-- ++++++ -->
+      <!-- LEADERBOARD -->
+      <!-- ++++++ -->
+      <table class="leaderboard">
+        <caption>LEADERBOARD</caption>
+        <thead class="headLeaderboard">
+          <tr>
+            <th>USERNAME</th>
+            <th>TOTAL</th>
+            <th>WON</th>
+            <th>LOST</th>
+            <th>TIED</th>
+          </tr>
+        </thead>
+        <tbody class="bodyLeaderboard">
+          <!-- data from json -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- production version, optimized for size and speed -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="./scripts/games.js"></script>
+</body>
+</html>

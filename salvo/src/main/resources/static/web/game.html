@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ship Locations!</title>
+    <style>
+        table, th, td {border: 1px solid black;border-collapse: collapse;}
+		th, td {width: calc(3vw + 0.5vh); height: calc(3vw + 0.5vh); text-align: center;}
+		table {background-color: lightblue;}
+		#tableros {display: flex; justify-content: space-around; margin-bottom: 5%; }
+		.tablaNaves {}
+    </style>
+</head>
+<body>
+    <h1>Ship Locations!</h1>
+    <div id="app">
+        <h2>{{playerOne.email}} (YOU) VS {{playerTwo.email}}</h2>
+        <div id="tableros"></div>
+        <div id="misNaves"></div>
+
+    </div>
+    <!-- production version, optimized for size and speed -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./scripts/game.js"></script>
+</body>
+</html>
