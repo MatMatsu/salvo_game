@@ -4,7 +4,9 @@ var app = new Vue({
     allGames: [],
     user: {},
     players: [],
-    finishGames: []
+    finishGames: [],
+    name: "",
+    pass: ""
   },
   created() {
     this.fetchData();
@@ -23,6 +25,30 @@ var app = new Vue({
         this.createGamesTable(this.allGames);
         this.createLeaderboard(this.players);
       })
+    },logFetchData() {
+        let url = "/api/players"
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify({userName: this.name, password: this.pass}),
+          headers: new Headers({
+            "Content-Type": "application/json"
+          })
+        }).then(res => res.text()
+        ).then(response => {
+          if(response == "Exist") {
+            alert("El usuario ya existe.");
+          } else {
+            alert("Usuario registrado exitosamente. Ahora logueate!");
+            document.querySelector("#username").value = document.querySelector("#newUsername").value;
+          }
+          document.querySelector("#newUsername").value = "";
+          document.querySelector("#newPassword").value = "";
+        })
+    },getValues(event) {
+      this.name = document.querySelector("#newUsername").value;
+      this.pass = document.querySelector("#newPassword").value;
+
+      this.logFetchData();
     },
     getFinishGames(juegos) {
       let terminados = [];

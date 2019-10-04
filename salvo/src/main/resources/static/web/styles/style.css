@@ -11,6 +11,12 @@ header {
   text-align: center;
 }
 
+.formularios {margin: auto; display: flex; justify-content: space-around;}
+
+label, input, .boton {width: 50%;}
+
+.logueo, .registro { width: 40vw; margin: auto; text-align: center;}
+
 .tablas {
   display: flex;
   justify-content: space-around;
@@ -20,10 +26,6 @@ header {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
 }
-
-.gamesTable {width: 40vw;}
-
-.leaderboard {width: 50vw;}
 
 .leaderboard td, .leaderboard th, .gamesTable td, .gamesTable th {
   border: 1px solid #ddd;

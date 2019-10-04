@@ -16,7 +16,9 @@ import static java.util.stream.Collectors.*;
 @RestController
 @RequestMapping("/api")
 public class SalvoController {
-
+    //-----------------------------------------------------
+    //  AUTOWIRED
+    //-----------------------------------------------------
     @Autowired
     private GameRepository gameRepo;
 
@@ -24,12 +26,21 @@ public class SalvoController {
     private PlayerRepository playRepo;
 
     @Autowired
+    private GamePlayerRepository gamePlayRepo;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
+    //-----------------------------------------------------
+    // METHODS
+    //-----------------------------------------------------
     private boolean isGuest(Authentication authentication) {
         return authentication == null || authentication instanceof AnonymousAuthenticationToken;
     }
 
+    //-----------------------------------------------------
+    // REQUEST MAPPING
+    //-----------------------------------------------------
     @RequestMapping("/games")
     private Map<String, Object> getMap (Authentication auth) {
         Map<String, Object> result = new HashMap<String, Object>();
@@ -52,9 +63,6 @@ public class SalvoController {
         return result;
     }
 
-    @Autowired
-    private GamePlayerRepository gamePlayRepo;
-
     @RequestMapping("/game_view/{gamePlayer_id}")
     public Map<String, Object> findGame(@PathVariable Long gamePlayer_id) {
         GamePlayer gamePlayer = gamePlayRepo.findById(gamePlayer_id).get();
@@ -65,21 +73,14 @@ public class SalvoController {
     }
 
     @RequestMapping(value="/players", method=RequestMethod.POST)
-    public ResponseEntity<String> createPlayer(@RequestBody Player player) {
+    public String createPlayer(@RequestBody Player player) {
         Player playerExist = playRepo.findByUserName(player.getUserName());
         if (playerExist != null) {
-            throw new UsernameNotFoundException("Unknown user: " + player.getUserName());
+            return "Exist";
         } else {
-            Map<String, Object> result = new HashMap<>();
-            result.put("name", player.getUserName());
-            result.put("pass", passwordEncoder.encode(player.getPassword()));
-
-            //Player newPlayer = new Player(player.getUserName(),passwordEncoder.encode(player.getPassword()));
-            Player newPlayer = new Player(player.getUserName(),player.getPassword());
+            Player newPlayer = new Player(player.getUserName(),passwordEncoder.encode(player.getPassword()));
             playRepo.save(newPlayer);
-
         }
-        return null;
+        return "No exist";
     }
-
 }

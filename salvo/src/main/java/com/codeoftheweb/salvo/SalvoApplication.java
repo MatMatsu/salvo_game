@@ -351,13 +351,13 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 */
                 .and()
             .formLogin()
-                .loginPage("/web/login.html").permitAll()
+                .loginPage("/web/games.html").permitAll()
                 .successHandler((req, res, auth) -> clearAuthenticationAttributes(req))
                 .defaultSuccessUrl("/web/games.html")
                 .and()
             .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/web/login.html");
+                .logoutSuccessUrl("/web/games.html");
     }
 
 
